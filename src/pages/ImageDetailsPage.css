@@ -1,5 +1,5 @@
 .image-details-page {
-    padding: 2rem;
+    padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -44,19 +44,87 @@
   
   .similar-images {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1rem;
     margin-top: 1rem;
   }
   
-  .similar-images img {
-    width: 100%;
-    height: auto;
+  .similar-image-card {
+    border: 1px solid #ddd;
     border-radius: 8px;
+    overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
   }
   
-  .similar-images img:hover {
+  .similar-image-card:hover {
     transform: scale(1.05);
+  }
+  
+  .similar-image-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .image-info {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+
+  h4 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(200deg, red, yellow, green, blue, violet, orange);
+    background-size: 400% 100%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientAnimation 5s linear infinite
+  }
+  
+  .image-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .image-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    background-color: #f9f9f9;
+  }
+  
+  .image-actions button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .image-actions button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Pour les écrans mobiles */
+  @media (max-width: 768px) {
+    .similar-images {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  
+    .similar-image-card img {
+      height: 150px;
+    }
+  
+    .image-actions button {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
   }

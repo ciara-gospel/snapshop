@@ -5,8 +5,14 @@
   }
   
   .gallery-title {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #333;
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(200deg, red, yellow, green, blue, violet, orange);
+    background-size: 400% 100%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientAnimation 5s linear infinite
   }

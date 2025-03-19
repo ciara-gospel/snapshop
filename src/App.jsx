@@ -12,13 +12,11 @@ const App = () => {
     <ImageProvider>
       <Router>
         <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/image/:id" element={<ImageDetailsPage />} />
-          </Routes>
-        </main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/image/:id" element={<ImageDetailsPage />} /> {/* Route pour ImageDetailsPage */}
+        </Routes>
         <Footer />
       </Router>
     </ImageProvider>

@@ -1,10 +1,15 @@
 const API_KEY = 'wWhYtGyerI3FUOWz9HmSFYWEToCmhGunONOdjJTZ75boTbrzlIkiIALx';
 const BASE_URL = 'https://api.pexels.com/v1';
 
-export const fetchImages = async (query, page = 1) => {
-    const url = query
-      ? `${BASE_URL}/search?query=${query}&page=${page}&per_page=30`
-      : `${BASE_URL}/curated?page=${page}&per_page=30`;
+export const fetchImages = async (query, id = null) => {
+    let url;
+    if (id) {
+      url = `${BASE_URL}/photos/${id}`; // Récupérer une image spécifique par ID
+    } else {
+      url = query
+        ? `${BASE_URL}/search?query=${query}&per_page=30`
+        : `${BASE_URL}/curated?per_page=30`;
+    }
   
     const response = await fetch(url, {
       headers: {
@@ -17,16 +22,23 @@ export const fetchImages = async (query, page = 1) => {
     }
   
     const data = await response.json();
-    return data.photos.map((photo) => ({
-      id: photo.id,
-      width: photo.width, // Inclure la largeur
-      height: photo.height, // Inclure la hauteur
-      photographer: photo.photographer,
-      src: {
-        small: photo.src.small,
-        medium: photo.src.medium,
-        large: photo.src.large,
-      },
-      photographer: photo.photographer
-    }));
+    if (id) {
+      // Retourner une seule image si un ID est spécifié
+      return {
+        id: data.id,
+        src: data.src,
+        photographer: data.photographer,
+        width: data.width,
+        height: data.height,
+      };
+    } else {
+      // Retourner une liste d'images
+      return data.photos.map((photo) => ({
+        id: photo.id,
+        src: photo.src,
+        photographer: photo.photographer,
+        width: photo.width,
+        height: photo.height,
+      }));
+    }
   };
