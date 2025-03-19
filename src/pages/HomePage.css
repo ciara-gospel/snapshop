@@ -1,23 +1,43 @@
 .home-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-    text-align: center;
-    background-color: #f4f4f4;
-    padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 2rem;
+  background-image: url('https://images.pexels.com/photos/2400594/pexels-photo-2400594.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load'); /* Chemin de l'image de fond */
+  background-position: center;
+  background-size:  auto;
   }
   
   .home-page h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    color: #444;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, red, yellow, green, blue, violet, orange);
+    background-size: 400% 100%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientAnimation 5s linear infinite
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%; /* Début du dégradé */
+    }
+    100% {
+        background-position: 100% 50%;
+    }
   }
   
   .home-page p {
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
-    color: #555;
+    color: #000;
   }
   
   .home-page button {

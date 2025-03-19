@@ -1,22 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import DownloadModal from './DownloadModal'; // Importez le composant DownloadModal
 import './ImageCard.css';
 
 const ImageCard = ({ image }) => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleView = () => {
-    navigate(`/image/${image.id}`);
+    navigate(`/image/${image.id}`); // Rediriger vers ImageDetailsPage
   };
 
-  const handleDownload = () => {
-    setIsModalOpen(true); // Ouvre la modale
-  };
+  const handleDownload = async () => {
+    const imageUrl = image.src.medium; // URL de l'image à télécharger
 
-  const closeModal = () => {
-    setIsModalOpen(false); // Ferme la modale
+    try {
+      // Récupérer l'image en tant que Blob
+      const response = await fetch(imageUrl);
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération de l\'image');
+      }
+
+      const blob = await response.blob(); // Convertir la réponse en Blob
+
+      // Créer un lien de téléchargement
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob); // Créer une URL pour le Blob
+      link.download = `image_${image.id}.jpg`; // Nom du fichier
+      document.body.appendChild(link); // Ajouter le lien au DOM
+      link.click(); // Déclencher le téléchargement
+      document.body.removeChild(link); // Supprimer le lien du DOM
+
+      // Libérer l'URL de l'objet Blob
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error('Erreur lors du téléchargement :', error);
+      alert('Le téléchargement a échoué. Veuillez réessayer.');
+    }
   };
 
   return (
@@ -26,10 +44,9 @@ const ImageCard = ({ image }) => {
         <p>{image.photographer}</p> {/* Afficher le nom du photographe */}
       </div>
       <div className="image-actions">
-        <button onClick={handleView}>View</button>
-        <button onClick={handleDownload}>Download</button>
+        <button onClick={handleView}>View</button> {/* Bouton View */}
+        <button onClick={handleDownload}>Download</button> {/* Bouton Download */}
       </div>
-      {isModalOpen && <DownloadModal image={image} onClose={closeModal} />} {/* Affiche la modale */}
     </div>
   );
 };
