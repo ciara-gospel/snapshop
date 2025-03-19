@@ -1,0 +1,58 @@
+import React, { useEffect, useState } from 'react';
+import { useImageContext } from '../context/ImageContext';
+import { fetchImages } from '../services/api';
+import Gallery from '../components/Gallery';
+import SearchBar from '../components/SearchBar';
+import './GalleryPage.css';
+
+const GalleryPage = () => {
+  const { images, setImages, isLoading, setIsLoading } = useImageContext();
+  const [searchTerm, setSearchTerm] = useState(''); // État pour la recherche
+
+  // Fonction pour gérer la recherche
+  const handleSearch = async (query) => {
+    setSearchTerm(query);
+    if (query) {
+      setIsLoading(true);
+      try {
+        const images = await fetchImages(query); // Récupérer les images correspondantes
+        setImages(images);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  // Charger les images par défaut au montage du composant
+  useEffect(() => {
+    const loadImages = async () => {
+      setIsLoading(true);
+      try {
+        const images = await fetchImages(''); // Récupérer des images par défaut
+        setImages(images);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadImages();
+  }, [setImages, setIsLoading]);
+
+  return (
+    <div className="gallery-page">
+      <h2 className="gallery-title">Gallery</h2>
+      <SearchBar onSearch={handleSearch} /> {/* Barre de recherche */}
+      {isLoading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <Gallery images={images} />
+      )}
+    </div>
+  );
+};
+
+export default GalleryPage;
