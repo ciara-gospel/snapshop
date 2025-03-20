@@ -1,14 +1,20 @@
-/* Header.css */
-.header {
+
+.header{
+    background-color: var(--background-color);
+    color: white;
+}
+
+.header-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background-color: #333;
-    color: white;
-  }
-  
-  .logo a {
+    width: 95vw;
+    max-width: 1500px;
+    padding: 1rem 0;
+    margin: 0 auto;
+}
+
+.logo a {
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
@@ -19,22 +25,19 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientAnimation 5s linear infinite
-  }
-  
-  .nav ul {
-    list-style: none;
+}
+
+.nav ul {
     display: flex;
     gap: 1rem;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav ul li a {
+}
+
+.nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 1rem;
-  }
-  
-  .nav ul li a:hover {
+}
+
+.nav ul li a:hover {
     text-decoration: underline;
-  }
+}

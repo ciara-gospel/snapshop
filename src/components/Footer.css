@@ -1,8 +1,11 @@
 .footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #333;
-    color: white;
-    bottom: 0;
-    width: 100%;
-  }
+  background-color: var(--background-color);
+  color: white;
+}
+
+footer>div {
+  text-align: center;
+  padding: 1rem 0;
+  width: var(--app-width);
+  max-width: var(--app-max-width);
+}

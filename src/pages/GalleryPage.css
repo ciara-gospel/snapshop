@@ -2,9 +2,10 @@
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
-  }
-  
-  .gallery-title {
+    min-height: 90vh;
+}
+
+.gallery-title {
     font-size: 4rem;
     margin-bottom: 1.5rem;
     text-align: center;
@@ -15,4 +16,4 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientAnimation 5s linear infinite
-  }
+}

@@ -2,18 +2,18 @@
     display: flex;
     justify-content: center;
     margin: 2rem 0;
-  }
-  
-  .search-bar input {
+}
+
+.search-bar input {
     padding: 0.8rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 30px;
     width: 300px;
     outline: none;
-  }
-  
-  .search-bar button {
+}
+
+.search-bar button {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
     color: white;
@@ -21,8 +21,8 @@
     border: none;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
-  }
-  
-  .search-bar button:hover {
+}
+
+.search-bar button:hover {
     background-color: #0056b3;
-  }
+}

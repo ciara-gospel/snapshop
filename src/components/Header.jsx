@@ -1,23 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Header.css'; // Fichier CSS pour le style
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Header.css"; // Fichier CSS pour le style
 
 const Header = () => {
   return (
     <header className="header">
-      <div className="logo">
-        <Link to="/">ImageBrowser</Link>
+      <div className="header-wrapper">
+        <div className="logo">
+          <Link to="/">ImageBrowser</Link>
+        </div>
+        <nav className="nav">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/gallery">Gallery</Link>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <nav className="nav">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/gallery">Gallery</Link>
-          </li>
-        </ul>
-      </nav>
     </header>
   );
 };
