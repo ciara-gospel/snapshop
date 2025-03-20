@@ -20,7 +20,7 @@
     color: white;
     text-decoration: none;
     font-weight: bold;
-    background: linear-gradient(200deg, red, yellow, green, blue, violet, orange);
+    background: linear-gradient(200deg,  white,  black, #0673da);
     background-size: 400% 100%;
     background-clip: text;
     -webkit-text-fill-color: transparent;
