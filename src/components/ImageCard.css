@@ -18,27 +18,66 @@
   
   .image-actions {
     display: flex;
-    gap: 5rem;
-    padding: 1rem;
+    justify-content: space-around;
+    padding: 0.5rem;
     background-color: #f9f9f9;
   }
-
+  
   .image-actions button {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     color: white;
-    background-color: #007bff;
+    width: 120px;
+    background-color: var(--primary-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .download-button {
+    background-color: var(--secondary-color);
   }
   
   .image-actions button:hover {
     background-color: #0056b3;
   }
-
+  
   .image-info p {
-   text-align: center;
-   font-size: 1rem;
-   color: #333;
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  /* Styles pour l'icône et le texte */
+  .download-icon {
+    display: none; /* Masquer l'icône par défaut */
+  }
+  
+  .download-text {
+    display: inline; /* Afficher le texte par défaut */
+  }
+  
+  /* Pour les écrans mobiles (max-width: 768px) */
+  @media screen and (max-width: 320px) {
+    .download-icon {
+      display: inline; /* Afficher l'icône sur mobile */
+    }
+  
+    .download-text {
+      display: none; /* Masquer le texte sur mobile */
+    }
+  }
+  
+  /* Pour les écrans desktop (min-width: 769px) */
+  @media screen and (min-width: 769px) {
+    .download-icon {
+      display: none; /* Masquer l'icône sur desktop */
+    }
+  
+    .download-text {
+      display: inline; /* Afficher le texte sur desktop */
+    }
   }

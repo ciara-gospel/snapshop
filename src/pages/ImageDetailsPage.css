@@ -73,18 +73,18 @@
     background-color: #f9f9f9;
     text-align: center;
   }
-
+  
   h4 {
     font-size: 4rem;
     margin-bottom: 2rem;
     text-align: center;
     font-size: 4rem;
     font-weight: bold;
-    background: linear-gradient(200deg,  white,  black, #0673da);
+    background: linear-gradient(200deg, white, black, #0673da);
     background-size: 400% 100%;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradientAnimation 5s linear infinite
+    animation: gradientAnimation 5s linear infinite;
   }
   
   .image-info p {
@@ -114,8 +114,33 @@
     background-color: #0056b3;
   }
   
-  /* Pour les écrans mobiles */
-  @media (max-width: 768px) {
+  /* Styles pour afficher l'icône sur mobile et le texte sur desktop */
+  .desktop-text {
+    display: inline;
+  }
+  
+  .mobile-icon {
+    display: none;
+  }
+
+  .back {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .previous {
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 320px) {
     .similar-images {
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
@@ -127,5 +152,13 @@
     .image-actions button {
       padding: 0.4rem 0.8rem;
       font-size: 0.8rem;
+    }
+  
+    .desktop-text {
+      display: none;
+    }
+  
+    .mobile-icon {
+      display: inline;
     }
   }

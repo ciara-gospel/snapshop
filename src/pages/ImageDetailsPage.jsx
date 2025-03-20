@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchImages } from '../services/api';
 import { useImageContext } from '../context/ImageContext';
 import DownloadModal from '../components/DownloadModal';
+import { FaDownload, FaEye } from 'react-icons/fa';
 import './ImageDetailsPage.css';
 
 const ImageDetailsPage = () => {
@@ -12,6 +13,11 @@ const ImageDetailsPage = () => {
   const [image, setImage] = useState(null);
   const [similarImages, setSimilarImages] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const navigateToGallery = () => {
+    navigate('/gallery');
+  };
 
   // Charger les détails de l'image et les images similaires
   useEffect(() => {
@@ -86,6 +92,7 @@ const ImageDetailsPage = () => {
   }
 
   return (
+    <>
     <div className="image-details-page">
       <div className="main-image">
         <img src={image.src.large} alt={image.photographer} />
@@ -102,14 +109,24 @@ const ImageDetailsPage = () => {
               <p>{img.photographer}</p> {/* Nom du photographe */}
             </div>
             <div className="image-actions">
-              <button onClick={() => handleViewSimilarImage(img.id)}>View</button>
-              <button onClick={() => handleDownloadSimilarImage(img)}>Download</button>
+              <button onClick={() => handleViewSimilarImage(img.id)}>
+              <span className="desktop-text">View</span> {/* Texte pour desktop */}
+              <FaEye className="mobile-icon" /> {/* Icône pour mobile */}
+              </button>
+              <button onClick={() => handleDownloadSimilarImage(img)}>
+                <span className="desktop-text">Download</span> {/* Texte pour desktop */}
+                <FaDownload className="mobile-icon" /> {/* Icône pour mobile */}
+              </button>
             </div>
           </div>
         ))}
       </div>
       {isModalOpen && <DownloadModal image={image} onClose={closeModal} />}
     </div>
+    <div className="back">
+    <button onClick={navigateToGallery} className="previous">previous</button>
+    </div>
+    </>
   );
 };
 

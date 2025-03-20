@@ -2,6 +2,8 @@
   --app-width: 95vw;
   --app-max-width: 1500px;
   --background-color: #333;
+  --primary-color: #007bff;
+  --secondary-color: #000;
 }
 
 *{
