@@ -20,27 +20,23 @@
   .main-image h3 {
     font-size: 1.5rem;
     margin: 1rem 0;
-    color: #333;
+    color: #fff;
   }
   
   .main-image p {
     font-size: 1rem;
-    color: #555;
+    color: #fff;
   }
   
   .main-image button {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
-    color: white;
-    background-color: #007bff;
+    color: #fff;
+    background-color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 1rem;
-  }
-  
-  .main-image button:hover {
-    background-color: #0056b3;
   }
   
   .similar-images {
@@ -54,7 +50,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px #0000001a;
     transition: transform 0.2s ease-in-out;
   }
   
@@ -80,11 +76,7 @@
     text-align: center;
     font-size: 4rem;
     font-weight: bold;
-    background: linear-gradient(200deg, white, black, #0673da);
-    background-size: 400% 100%;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientAnimation 5s linear infinite;
+    color: #000;
   }
   
   .image-info p {
@@ -99,17 +91,7 @@
     padding: 1rem;
     background-color: #f9f9f9;
   }
-  
-  .image-actions button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+
   .similar-image-card .image-actions button:first-child {
     background-color: black;
     color: white;
@@ -141,12 +123,12 @@
 
   .previous {
     padding: 0.5rem 1rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #007bff;
-    color: white;
+    background-color: #000;
+    color: #fff;
     display: flex;
     margin: 0 auto;
   }

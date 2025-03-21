@@ -88,21 +88,7 @@
     font-size: 2.8rem;
     text-align: center;
     font-weight: bold;
-    background: linear-gradient(200deg,  white,  black, #0673da);
-    background-size: 400% 100%;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientAnimation 5s linear infinite
-}
-
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    100% {
-        background-position: 100% 50%;
-    }
+    color: #fff;
 }
 
 .content p {
@@ -115,12 +101,8 @@
     padding: 0.8rem 2rem;
     font-size: 1rem;
     color: white;
-    background-color: #007bff;
+    background-color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.home-page button:hover {
-    background-color: #0056b3;
 }

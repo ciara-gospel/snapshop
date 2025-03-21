@@ -124,7 +124,7 @@ const ImageDetailsPage = () => {
       {isModalOpen && <DownloadModal image={image} onClose={closeModal} />}
     </div>
     <div className="back">
-    <button onClick={navigateToGallery} className="previous">previous</button>
+    <button onClick={navigateToGallery} className="previous">Previous</button>
     </div>
     </>
   );

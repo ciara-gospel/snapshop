@@ -20,11 +20,6 @@
     color: white;
     text-decoration: none;
     font-weight: bold;
-    background: linear-gradient(200deg,  white,  black, #0673da);
-    background-size: 400% 100%;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientAnimation 5s linear infinite
 }
 
 .nav ul {
