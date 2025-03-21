@@ -59,6 +59,32 @@
   .download-text {
     display: inline; /* Afficher le texte par défaut */
   }
+
+  image-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    background-color: #f9f9f9;
+  }
+  
+  /* Styles pour le bouton "View" */
+  .image-actions button:first-child {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+  }
+  
+  /* Styles pour le bouton "Download" */
+  .image-actions button.download-button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+  
+  /* Styles pour les icônes dans les boutons */
+  .image-actions button .download-icon {
+    color: inherit;
+  }
   
   /* Pour les écrans mobiles (max-width: 768px) */
   @media screen and (max-width: 320px) {

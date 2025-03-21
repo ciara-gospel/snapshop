@@ -46,10 +46,7 @@ const DownloadModal = ({ image, onClose }) => {
         </select>
         <div className="modal-actions">
           <button onClick={onClose}>Cancel</button>
-          <button onClick={handleDownload} className="download-button">
-                    <span className="download-text">Download</span> {/* Texte pour desktop */}
-                    <FaDownload className="download-icon" /> {/* Icône pour mobile */}
-                  </button>
+          <button onClick={handleDownload}>Download</button>
         </div>
       </div>
     </div>
