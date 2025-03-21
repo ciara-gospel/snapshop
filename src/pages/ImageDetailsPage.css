@@ -116,19 +116,16 @@
     border: 1px solid white;
   }
   
-  /* Styles pour le bouton "Download" dans les images similaires */
   .similar-image-card .image-actions button:last-child {
     background-color: white;
     color: black;
     border: 1px solid black;
   }
   
-  /* Styles pour les icônes dans les boutons */
   .similar-image-card .image-actions button .mobile-icon {
     color: inherit;
   }
   
-  /* Styles pour afficher l'icône sur mobile et le texte sur desktop */
   .desktop-text {
     display: inline;
   }
