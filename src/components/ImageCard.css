@@ -41,10 +41,6 @@
     background-color: var(--secondary-color);
   }
   
-  .image-actions button:hover {
-    background-color: #0056b3;
-  }
-  
   .image-info p {
     text-align: center;
     font-size: 1rem;
@@ -59,7 +55,7 @@
     display: inline;
   }
 
-  image-actions {
+  .image-actions {
     display: flex;
     justify-content: space-around;
     padding: 1rem;

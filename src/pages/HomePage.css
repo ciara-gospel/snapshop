@@ -3,99 +3,62 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 85vh;
     text-align: center;
     padding: 2rem;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    transition: background-image 1s ease-in-out;
-    position: relative;
-    z-index: 2;
 }
 
-.home-page::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-color: #00000080;
-    z-index: 1;
-}
-
-.background-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0;
-    animation: fade 15s infinite;
-}
-
-.background-slide:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.background-slide:nth-child(2) {
-    animation-delay: 5s;
-}
-
-.background-slide:nth-child(3) {
-    animation-delay: 10s;
-}
-
-@keyframes fade {
-    0% {
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    30% {
-        opacity: 1;
-    }
-
-    40% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-.content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 95vh;
-    gap: 1rem;
-    text-align: center;
-    color: white;
-}
-
-.content h1 {
+.home-page h1 {
     font-size: 2.8rem;
     text-align: center;
     font-weight: bold;
-    color: #fff;
+    color: #000;
+    margin-bottom: 1.5rem;
 }
 
-.content p {
+.home-page p {
     font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: #fffdfd;
+    margin-bottom: 3.5rem;
+    color: #000;
 }
+
+.home-page .content {
+    width: 100%;
+    overflow: hidden; /* Cache le débordement des images */
+    position: relative;
+  }
+  
+  .home-page .image-scroll-container {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.5rem;
+    grid-auto-columns: minmax(200px, 1fr);
+    animation: scroll 15s linear infinite;
+  }
+  
+  .home-page .image-scroll-container img {
+    width: 200px; /* Les images remplissent leur conteneur */
+    height: 150px; /* Maintient le ratio des images */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 8px #0000001a;
+    margin-bottom: 4rem;
+  }
+  
+  /* Animation de défilement */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0); /* Départ à la position initiale */
+    }
+    100% {
+      transform: translateX(-100%); /* Défilement vers la gauche */
+    }
+  }
+
+  .home-page .image-scroll-container img:hover {
+    transform: scale(1.1); /* Agrandit légèrement l'image au survol */
+    transition: transform 0.3s ease; /* Animation fluide */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+  }
 
 .home-page button {
     padding: 0.8rem 2rem;

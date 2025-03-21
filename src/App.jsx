@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import GalleryPage from './pages/GalleryPage';
 import ImageDetailsPage from './pages/ImageDetailsPage';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import { ImageProvider } from './context/ImageContext';
 
 const App = () => {
@@ -17,7 +16,6 @@ const App = () => {
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/image/:id" element={<ImageDetailsPage />} /> {/* Route pour ImageDetailsPage */}
         </Routes>
-        <Footer />
       </Router>
     </ImageProvider>
   );
