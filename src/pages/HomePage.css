@@ -24,7 +24,7 @@
 
 .home-page .content {
     width: 100%;
-    overflow: hidden; /* Cache le débordement des images */
+    overflow: hidden;
     position: relative;
   }
   
@@ -37,27 +37,26 @@
   }
   
   .home-page .image-scroll-container img {
-    width: 200px; /* Les images remplissent leur conteneur */
-    height: 150px; /* Maintient le ratio des images */
-    border-radius: 8px; /* Coins arrondis */
+    width: 200px;
+    height: 150px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px #0000001a;
     margin-bottom: 4rem;
   }
   
-  /* Animation de défilement */
   @keyframes scroll {
     0% {
-      transform: translateX(0); /* Départ à la position initiale */
+      transform: translateX(0);
     }
     100% {
-      transform: translateX(-100%); /* Défilement vers la gauche */
+      transform: translateX(-100%);
     }
   }
 
   .home-page .image-scroll-container img:hover {
-    transform: scale(1.1); /* Agrandit légèrement l'image au survol */
-    transition: transform 0.3s ease; /* Animation fluide */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 16px #00000033;
   }
 
 .home-page button {
