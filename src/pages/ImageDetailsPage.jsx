@@ -96,9 +96,11 @@ const ImageDetailsPage = () => {
     <div className="image-details-page">
       <div className="main-image">
         <img src={image.src.large} alt={image.photographer} />
+        <div className="details">
         <h3>{image.photographer}</h3>
         <p>Dimensions: {image.width} x {image.height}</p>
         <button onClick={handleDownload}>Download</button>
+        </div>
       </div>
       <h4>Similar Images</h4>
       <div className="similar-images">

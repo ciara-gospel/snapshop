@@ -27,10 +27,6 @@ const HomePage = () => {
           <img src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHRyYXZlbGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="" />
           <img src="https://images.unsplash.com/photo-1521579880562-101f47676ee1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dHJhdmVsaW5nfGVufDB8fDB8fHww" alt="" />
           <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D" alt="" />
-          <img src="https://cdn.pixabay.com/photo/2023/08/15/15/16/ai-generated-8192146_640.jpg" alt="" />
-          <img src="https://cdn.pixabay.com/photo/2021/04/27/04/14/girl-6210452_640.jpg" alt="" />
-          <img src="https://cdn.pixabay.com/photo/2018/05/02/00/59/market-3367466_640.jpg" alt="" />
-          <img src="https://cdn.pixabay.com/photo/2020/08/06/12/28/woman-5467838_640.jpg" alt="" />
         </div>
         </div>
         <button onClick={navigateToGallery}>Start Browsing</button>

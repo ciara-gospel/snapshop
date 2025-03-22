@@ -42,6 +42,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px #0000001a;
     margin-bottom: 4rem;
+    object-fit: cover;
   }
   
   @keyframes scroll {
