@@ -44,7 +44,7 @@
     margin-bottom: 4rem;
     object-fit: cover;
   }
-  
+
   @keyframes scroll {
     0% {
       transform: translateX(0);
