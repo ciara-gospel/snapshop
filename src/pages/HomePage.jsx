@@ -13,7 +13,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-        <h1>Welcome to ImageDownloader</h1>
+        <h1>Welcome to ImageBrowser</h1>
         <p>Discover amazing images and download them in various dimensions.</p>
         <div className="content">
           <div className="image-scroll-container">
