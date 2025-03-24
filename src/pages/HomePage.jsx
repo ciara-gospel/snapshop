@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
         <h1>Welcome to ImageBrowser</h1>
-        <p>Discover amazing images and download them in various dimensions.</p>
+        <p>Discover amazing images and download them easly and in various size.</p>
         <div className="content">
           <div className="image-scroll-container">
           <img src="https://images.unsplash.com/photo-1463438690606-f6778b8c1d10?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNvbG9yc3xlbnwwfHwwfHx8MA%3D%3D" alt="" />

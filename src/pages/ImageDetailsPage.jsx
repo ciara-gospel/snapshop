@@ -2,37 +2,38 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchImages } from '../services/api';
 import { useImageContext } from '../context/ImageContext';
-import DownloadModal from '../components/DownloadModal';
 import { FaDownload, FaEye } from 'react-icons/fa';
 import './ImageDetailsPage.css';
 
 const ImageDetailsPage = () => {
-  const { id } = useParams(); // Récupérer l'ID de l'image depuis l'URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const { images } = useImageContext();
   const [image, setImage] = useState(null);
   const [similarImages, setSimilarImages] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSize, setSelectedSize] = useState('original');
 
+  const sizeOptions = [
+    { value: 'small', label: 'Small (640px)' },
+    { value: 'medium', label: 'Medium (1280px)' },
+    { value: 'large', label: 'Large (1920px)' },
+    { value: 'original', label: 'Original' }
+  ];
 
   const navigateToGallery = () => {
     navigate('/gallery');
   };
 
-  // Charger les détails de l'image et les images similaires
   useEffect(() => {
     const loadImageDetails = async () => {
       try {
-        // Trouver l'image sélectionnée dans le contexte
         const selectedImage = images.find((img) => img.id === parseInt(id));
         if (selectedImage) {
-          setImage(selectedImage); // Mettre à jour l'image actuelle
-          // Charger les images similaires
+          setImage(selectedImage);
           const similar = await fetchImages(selectedImage.photographer);
           setSimilarImages(similar);
         } else {
-          // Si l'image n'est pas trouvée dans le contexte, la récupérer via l'API
-          const imageData = await fetchImages('', id); // Utilisez une fonction adaptée pour récupérer une image par ID
+          const imageData = await fetchImages('', id);
           if (imageData) {
             setImage(imageData);
             const similar = await fetchImages(imageData.photographer);
@@ -45,89 +46,168 @@ const ImageDetailsPage = () => {
     };
 
     loadImageDetails();
-  }, [id, images]); // Recharger les données lorsque l'ID change
+  }, [id, images]);
 
-  const handleDownload = () => {
-    setIsModalOpen(true); // Ouvrir la modale
-  };
+  const handleDownload = async () => {
+    if (!image) return;
 
-  const closeModal = () => {
-    setIsModalOpen(false); // Fermer la modale
+    let downloadUrl;
+    let sizeLabel = '';
+    
+    switch (selectedSize) {
+      case 'small':
+        downloadUrl = image.src.small;
+        sizeLabel = 'small';
+        break;
+      case 'medium':
+        downloadUrl = image.src.medium;
+        sizeLabel = 'medium';
+        break;
+      case 'large':
+        downloadUrl = image.src.large;
+        sizeLabel = 'large';
+        break;
+      default:
+        downloadUrl = image.src.original;
+        sizeLabel = 'original';
+    }
+
+    try {
+      const response = await fetch(downloadUrl);
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const photographerName = image.photographer.toLowerCase().replace(/\s+/g, '_');
+      const fileName = `image_${photographerName}_${sizeLabel}_${image.id}.jpg`;
+
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = fileName;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+
+      const button = document.querySelector('.download-button');
+      button.classList.add('downloading');
+      setTimeout(() => button.classList.remove('downloading'), 1000);
+      
+    } catch (error) {
+      console.error('Erreur de téléchargement:', error);
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = downloadUrl;
+      fallbackLink.download = `image_${image.id}_${sizeLabel}.jpg`;
+      fallbackLink.target = '_blank';
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      document.body.removeChild(fallbackLink);
+    }
   };
 
   const handleViewSimilarImage = (id) => {
-    navigate(`/image/${id}`); // Rediriger vers les détails de l'image similaire
+    navigate(`/image/${id}`);
   };
 
-  const handleDownloadSimilarImage = async (image) => {
-    const imageUrl = image.src.medium; // URL de l'image à télécharger
-
+  const handleDownloadSimilarImage = async (img) => {
     try {
-      // Récupérer l'image en tant que Blob
-      const response = await fetch(imageUrl);
-      if (!response.ok) {
-        throw new Error('Erreur lors de la récupération de l\'image');
-      }
+      const response = await fetch(img.src.original);
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
 
-      const blob = await response.blob(); // Convertir la réponse en Blob
-
-      // Créer un lien de téléchargement
       const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob); // Créer une URL pour le Blob
-      link.download = `image_${image.id}.jpg`; // Nom du fichier
-      document.body.appendChild(link); // Ajouter le lien au DOM
-      link.click(); // Déclencher le téléchargement
-      document.body.removeChild(link); // Supprimer le lien du DOM
+      link.href = blobUrl;
+      link.download = `image_${img.id}.jpg`;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-      // Libérer l'URL de l'objet Blob
-      URL.revokeObjectURL(link.href);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
     } catch (error) {
-      console.error('Erreur lors du téléchargement :', error);
-      alert('Le téléchargement a échoué. Veuillez réessayer.');
+      console.error('Erreur de téléchargement:', error);
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = img.src.original;
+      fallbackLink.download = `image_${img.id}.jpg`;
+      fallbackLink.target = '_blank';
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      document.body.removeChild(fallbackLink);
     }
   };
 
   if (!image) {
-    return <div>Image non trouvée</div>;
+    return <div className="loading-message">Image non trouvée</div>;
   }
 
   return (
     <>
-    <div className="image-details-page">
-      <div className="main-image">
-        <img src={image.src.large} alt={image.photographer} />
-        <div className="details">
-        <h3>{image.photographer}</h3>
-        <p>Dimensions: {image.width} x {image.height}</p>
-        <button onClick={handleDownload}>Download</button>
-        </div>
-      </div>
-      <h4>Similar Images</h4>
-      <div className="similar-images">
-        {similarImages.map((img) => (
-          <div key={img.id} className="similar-image-card">
-            <img src={img.src.medium} alt={img.photographer} />
-            <div className="image-info">
-              <p>{img.photographer}</p> {/* Nom du photographe */}
+      <div className="image-details-page">
+        <div className="main-image-container">
+          <div className="main-image">
+            <img src={image.src.large} alt={image.photographer} />
+          </div>
+          <div className="details">
+            <div className="toget">
+              <h3>{image.photographer}</h3>
+              <p>Dimensions: {image.width} x {image.height}</p>
             </div>
-            <div className="image-actions">
-              <button onClick={() => handleViewSimilarImage(img.id)}>
-              <span className="desktop-text">View</span> {/* Texte pour desktop */}
-              <FaEye className="mobile-icon" /> {/* Icône pour mobile */}
-              </button>
-              <button onClick={() => handleDownloadSimilarImage(img)}>
-                <span className="desktop-text">Download</span> {/* Texte pour desktop */}
-                <FaDownload className="mobile-icon" /> {/* Icône pour mobile */}
+            <div className="download-options">
+              <select 
+                value={selectedSize}
+                onChange={(e) => setSelectedSize(e.target.value)}
+                className="size-selector"
+              >
+                {sizeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <button onClick={handleDownload} className="download-button">
+                <span className="desktop-text">Download</span>
+                <FaDownload className="mobile-icon"/>
               </button>
             </div>
           </div>
-        ))}
+        </div>
+
+        <h4 className="similar-images-title">Similar Images</h4>
+        <div className="similar-images">
+          {similarImages.map((img) => (
+            <div key={img.id} className="similar-image-card">
+              <img src={img.src.medium} alt={img.photographer} />
+              <div className="image-info">
+                <p>{img.photographer}</p>
+              </div>
+              <div className="image-actions">
+                <button 
+                  onClick={() => handleViewSimilarImage(img.id)}
+                  className="view-button"
+                >
+                  <span className="desktop-text">View</span>
+                  <FaEye className="mobile-icon" />
+                </button>
+                <button 
+                  onClick={() => handleDownloadSimilarImage(img)}
+                  className="download-similar-button"
+                >
+                  <span className="desktop-text">Download</span>
+                  <FaDownload className="mobile-icon" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      {isModalOpen && <DownloadModal image={image} onClose={closeModal} />}
-    </div>
-    <div className="back">
-    <button onClick={navigateToGallery} className="previous">Previous</button>
-    </div>
+      <div className="back">
+        <button onClick={navigateToGallery} className="previous">Previous</button>
+      </div>
     </>
   );
 };
