@@ -7,15 +7,14 @@ import './GalleryPage.css';
 
 const GalleryPage = () => {
   const { images, setImages, isLoading, setIsLoading } = useImageContext();
-  const [searchTerm, setSearchTerm] = useState(''); // État pour la recherche
+  const [searchTerm, setSearchTerm] = useState('');
 
-  // Fonction pour gérer la recherche
   const handleSearch = async (query) => {
     setSearchTerm(query);
     if (query) {
       setIsLoading(true);
       try {
-        const images = await fetchImages(query); // Récupérer les images correspondantes
+        const images = await fetchImages(query);
         setImages(images);
       } catch (error) {
         console.error(error);
@@ -25,12 +24,11 @@ const GalleryPage = () => {
     }
   };
 
-  // Charger les images par défaut au montage du composant
   useEffect(() => {
     const loadImages = async () => {
       setIsLoading(true);
       try {
-        const images = await fetchImages(''); // Récupérer des images par défaut
+        const images = await fetchImages('');
         setImages(images);
       } catch (error) {
         console.error(error);
@@ -45,7 +43,7 @@ const GalleryPage = () => {
   return (
     <div className="gallery-page">
       <h2 className="gallery-title">Gallery</h2>
-      <SearchBar onSearch={handleSearch} /> {/* Barre de recherche */}
+      <SearchBar onSearch={handleSearch} />
       {isLoading ? (
         <div className="loading">Loading...</div>
       ) : (
