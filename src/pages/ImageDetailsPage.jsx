@@ -51,60 +51,38 @@ const ImageDetailsPage = () => {
   const handleDownload = async () => {
     if (!image) return;
 
-    let downloadUrl;
-    let sizeLabel = '';
-    
-    switch (selectedSize) {
-      case 'small':
-        downloadUrl = image.src.small;
-        sizeLabel = 'small';
-        break;
-      case 'medium':
-        downloadUrl = image.src.medium;
-        sizeLabel = 'medium';
-        break;
-      case 'large':
-        downloadUrl = image.src.large;
-        sizeLabel = 'large';
-        break;
-      default:
-        downloadUrl = image.src.original;
-        sizeLabel = 'original';
-    }
+    // Sélection de l'URL selon la taille choisie
+    const imageUrl = {
+      small: image.src.small,
+      medium: image.src.medium,
+      large: image.src.large,
+      original: image.src.original
+    }[selectedSize];
 
     try {
-      const response = await fetch(downloadUrl);
-      if (!response.ok) throw new Error('Network response was not ok');
-      
+      // Même méthode que dans ImageCard
+      const response = await fetch(imageUrl);
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération de l\'image');
+      }
+
       const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-
-      const photographerName = image.photographer.toLowerCase().replace(/\s+/g, '_');
-      const fileName = `image_${photographerName}_${sizeLabel}_${image.id}.jpg`;
-
       const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = fileName;
-      link.style.display = 'none';
+      link.href = URL.createObjectURL(blob);
+      link.download = `image_${image.id}_${selectedSize}.jpg`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
 
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
-
+      // Feedback visuel
       const button = document.querySelector('.download-button');
       button.classList.add('downloading');
       setTimeout(() => button.classList.remove('downloading'), 1000);
-      
+
     } catch (error) {
-      console.error('Erreur de téléchargement:', error);
-      const fallbackLink = document.createElement('a');
-      fallbackLink.href = downloadUrl;
-      fallbackLink.download = `image_${image.id}_${sizeLabel}.jpg`;
-      fallbackLink.target = '_blank';
-      document.body.appendChild(fallbackLink);
-      fallbackLink.click();
-      document.body.removeChild(fallbackLink);
+      console.error('Erreur lors du téléchargement :', error);
+      alert('Le téléchargement a échoué. Veuillez réessayer.');
     }
   };
 
@@ -114,30 +92,24 @@ const ImageDetailsPage = () => {
 
   const handleDownloadSimilarImage = async (img) => {
     try {
+      // Même méthode que dans ImageCard
       const response = await fetch(img.src.original);
-      if (!response.ok) throw new Error('Network response was not ok');
-      
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération de l\'image');
+      }
 
+      const blob = await response.blob();
       const link = document.createElement('a');
-      link.href = blobUrl;
+      link.href = URL.createObjectURL(blob);
       link.download = `image_${img.id}.jpg`;
-      link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
 
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
     } catch (error) {
-      console.error('Erreur de téléchargement:', error);
-      const fallbackLink = document.createElement('a');
-      fallbackLink.href = img.src.original;
-      fallbackLink.download = `image_${img.id}.jpg`;
-      fallbackLink.target = '_blank';
-      document.body.appendChild(fallbackLink);
-      fallbackLink.click();
-      document.body.removeChild(fallbackLink);
+      console.error('Erreur lors du téléchargement :', error);
+      alert('Le téléchargement a échoué. Veuillez réessayer.');
     }
   };
 
@@ -186,17 +158,11 @@ const ImageDetailsPage = () => {
                 <p>{img.photographer}</p>
               </div>
               <div className="image-actions">
-                <button 
-                  onClick={() => handleViewSimilarImage(img.id)}
-                  className="view-button"
-                >
+                <button onClick={() => handleViewSimilarImage(img.id)}>
                   <span className="desktop-text">View</span>
                   <FaEye className="mobile-icon" />
                 </button>
-                <button 
-                  onClick={() => handleDownloadSimilarImage(img)}
-                  className="download-similar-button"
-                >
+                <button onClick={() => handleDownloadSimilarImage(img)}>
                   <span className="desktop-text">Download</span>
                   <FaDownload className="mobile-icon" />
                 </button>
