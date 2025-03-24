@@ -7,7 +7,7 @@ const SearchBar = ({ onSearch }) => {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
-    onSearch(value); // Appeler la fonction de recherche à chaque changement
+    onSearch(value);
   };
 
   return (
