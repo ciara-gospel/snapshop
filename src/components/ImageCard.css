@@ -78,7 +78,7 @@
     color: inherit;
   }
   
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 560px) {
     .download-icon {
       display: inline;
     }
