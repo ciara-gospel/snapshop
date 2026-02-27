@@ -225,7 +225,7 @@ Authentication: API Key in HTTP headers
 
 > NOTE: The application requires a valid Pexels API key to function. Currently, the API key in the code is a demo key.
 
-**Deployment URL**: To be deployed on Vercel/Netlify
+**Deployment URL**: https://snapshop-eta.vercel.app/
 
 To test locally, see the [Installation](#installation) section.
 
@@ -242,7 +242,7 @@ To test locally, see the [Installation](#installation) section.
 
 1. **Clone the project**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/ciara-gospel/snapshop.git
    cd snapshop
    ```
 
