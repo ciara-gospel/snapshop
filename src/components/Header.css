@@ -1,0 +1,38 @@
+
+.header{
+    background-color: var(--background-color);
+    color: white;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95vw;
+    max-width: 1500px;
+    padding: 1rem 0;
+    margin: 0 auto;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav ul {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.nav ul li a:hover {
+    text-decoration: underline;
+}
